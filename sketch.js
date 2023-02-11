@@ -1,8 +1,8 @@
-let noiseScale = 0.001;
+let noiseScale = 0.01;
 let yoff = 0;
 let numRivers = 20;
-
 let rivers = []; // array to store all the rivers
+let allRivers = []; // array to store all the rivers
 
 function setup() {
   createCanvas(windowWidth, windowHeight, SVG);
@@ -20,6 +20,7 @@ function setup() {
       size: riverSize
     };
     rivers.push(river);
+    allRivers.push(river);
   }
   noLoop();
 }
@@ -27,25 +28,59 @@ function setup() {
 function draw() {
   background(255); // white background
   yoff += 0.01; // increment yoff
-  for (let color of colors) {
-    // draw only the rivers of the same color
-    for (let i = rivers.length - 1; i >= 0; i--) {
-      let river = rivers[i];
-      if (river.color === color) {
-        stroke(river.color, 255, 255);
-        strokeWeight(river.size);
-        for (let x = 0; x < width; x++) {
-          let noiseValue = noise(x * noiseScale, (i * 100 + yoff) * noiseScale);
-          let y = map(noiseValue, 0, 1, 0, height);
-          line(x, y, x + 1, y);
-        }
-        // remove the river from the array
-        rivers.splice(i, 1);
+  // iterate through the colors array
+  // and draw the rivers of the same color
+  for (let i = 0; i < colors.length; i++) {
+    drawRivers(colors[i]);
+  }
+
+  // iterate through the colors array
+  // and draw the rivers of the same color
+  for (let i = 0; i < colors.length; i++) {
+    drawAllRivers(colors[i]);
+  }
+}
+
+// function to draw rivers of the same color
+// and save the svg file
+function drawRivers(color) {
+  for (let i = rivers.length - 1; i >= 0; i--) {
+    let river = rivers[i];
+    if (river.color === color) {
+      stroke(river.color, 255, 255);
+      strokeWeight(river.size);
+      for (let x = 0; x < width; x++) {
+        let noiseValue = noise(x * noiseScale, (i * 100 + yoff) * noiseScale);
+        let y = map(noiseValue, 0, 1, 0, height);
+        line(x, y, x + 1, y);
       }
+      // remove the river from the array
+      rivers.splice(i, 1);
     }
-    // save the svg for each color
-    save("river_" + color + ".svg");
-    // clear the canvas
-    clear();
+  }
+  // save the svg for each color
+  // save("river_" + color + ".svg");
+  
+  // clear the canvas
+  clear();
+}
+
+// function to similar to drawRivers except that it
+// uses the allRivers array instead of the rivers array
+// and it takes the color as an argument
+function drawAllRivers(color) {
+  for (let i = allRivers.length - 1; i >= 0; i--) {
+    let river = allRivers[i];
+    if (river.color === color) {
+      stroke(river.color, 255, 255);
+      strokeWeight(river.size);
+      for (let x = 0; x < width; x++) {
+        let noiseValue = noise(x * noiseScale, (i * 100 + yoff) * noiseScale);
+        let y = map(noiseValue, 0, 1, 0, height);
+        line(x, y, x + 1, y);
+      }
+      // remove the river from the array
+      allRivers.splice(i, 1);
+    }
   }
 }
