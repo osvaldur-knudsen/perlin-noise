@@ -3,7 +3,7 @@ let yoff = 0;
 let numRivers = 20;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight, SVG);
   noLoop();
 }
 
@@ -23,4 +23,8 @@ function draw() {
       line(x, y, x + 1, y);
     }
   }
+
+  // save the svg
+  // save("river.svg");
+
 }
