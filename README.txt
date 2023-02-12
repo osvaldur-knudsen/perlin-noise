@@ -1,0 +1,1 @@
+The files comprise a small generative art project which uses perlin noise to generate sets of way lines ("rivers") in three colors. Each set og "rivers" in the same color are saved as an svg file. 
