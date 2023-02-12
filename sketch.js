@@ -1,6 +1,6 @@
 let noiseScale = 0.01;
 let yoff = 0;
-let numRivers = 20;
+let numRivers = 25;
 let rivers = []; // array to store all the rivers
 let allRivers = []; // array to store all the rivers
 
@@ -14,7 +14,7 @@ function setup() {
   // create a river object for each iteration
   for (let n = 0; n < numRivers; n++) {
     let riverColor = colors[floor(random(colors.length))];
-    let riverSize = map(n, 0, numRivers, 2, 10);
+    let riverSize = map(n, 0, numRivers, 1, 4);
     let river = {
       color: riverColor,
       size: riverSize
